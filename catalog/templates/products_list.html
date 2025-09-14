@@ -1,6 +1,14 @@
 {% extends 'base_prod.html '%}
 {% block content %}
 
+<style>
+        img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            }
+
+</style>
    <div class="content-area">
     <h1 class="text-center" style="padding: 30px">Каталог</h1>
     <div class="row">
@@ -9,7 +17,9 @@
         <div class="col-md-4 mb-4">
         <div class="card">
         <div class="card-header" >
-        <h5 style="text-align: center; background-color: gray; padding: 40px; width: 200px">Эскиз продукта</h5>
+        <div class="center-items">
+        <img src="/media/{{ product.photo }}">
+        </div>
         </div>
         <div class="card-body">
         <p class="card-text" style="text-align: center" > {{ product.name }} pk = {{ product.pk }}</p>
