@@ -1,0 +1,24 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white sidebar">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <span class="fs-4">Меню</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item"><a href="{% url 'catalog:home' %}" class="nav-link text-white">Главная</a></li>
+      <li><a href="{% url 'catalog:products_list' %}" class="nav-link text-white">Каталог</a></li>
+      <li><a href="category1.html" class="nav-link text-white">Категории</a></li>
+      <li><a href="{% url 'catalog:product_detail' pk=product.pk %}" class="nav-link text-white">Карточка товара</a></li>
+      <li><a href="{% url 'catalog:contacts' %}" class="nav-link text-white">Контакты</a></li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+        <img src="https://via.placeholder.com/32" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong>Пользователь</strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><a class="dropdown-item" href="#">Профиль</a></li>
+        <li><a class="dropdown-item" href="#">Выход</a></li>
+      </ul>
+    </div>
+</div>
