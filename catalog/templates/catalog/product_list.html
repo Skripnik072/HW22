@@ -11,6 +11,12 @@
 </style>
    <div class="content-area">
     <h1 class="text-center" style="padding: 30px">Каталог</h1>
+    <div>
+        <p>
+         <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}" role="button">Создать</a>
+        </p>
+
+    </div>
     <div class="row">
 
       {% for product in object_list %}
@@ -22,11 +28,12 @@
         </div>
         </div>
         <div class="card-body">
-        <p class="card-text" style="text-align: center" > {{ product.name }} pk = {{ product.pk }}</p>
+        <p class="card-text" style="text-align: center" > {{ product.name }} </p>
         <p class="card-text" style="text-align: center" > {{ product.description }}</p>
         <p class="card-text" style="text-align: center" > Цена за 1 кг {{ product.price }} руб.</p>
-        <a href="#" class="btn btn-outline-primary" >View</a>
-        <a href="#" class="btn btn-outline-primary" >Edit</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Просмотр</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Изменить</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
         <h6 style="text-align: right">9 mins</h6>
         </div>
         </div>

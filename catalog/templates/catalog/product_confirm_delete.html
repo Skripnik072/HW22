@@ -5,17 +5,12 @@
       <div class="col-5">
           <form class="row" method="post" enctype="multipart/form-data">
               <div class="card">
+                  <p class="card-text"> ВЫ действительно хотите удалить > {{ object.name }} )</p>
                   <div class="card-body">
                       {% csrf_token %}
-                      {{ form.as_p }}
                   </div>
-                  <button type="submit" class="btn btn-primary">
-                      {% if object %}
-                      Сохранить
-                      {% else %}
-                      Создать
-                      {% endif %}
-                  </button>
+                  <button type="submit" class="btn btn-primary"> Удалить </button>
+                   <a class="btn btn-outline-primary" href="{% url 'catalog:product_list' %}" role="button">Отменить</a>
               </div>
           </form>
       </div>
