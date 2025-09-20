@@ -1,13 +1,19 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white sidebar">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Меню</span>
+
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"><a href="{% url 'catalog:home' %}" class="nav-link text-white">Главная</a></li>
       <li><a href="{% url 'catalog:products_list' %}" class="nav-link text-white">Каталог</a></li>
       <li><a href="category1.html" class="nav-link text-white">Категории</a></li>
-      <li><a href="{% url 'catalog:product_detail' pk=product.pk %}" class="nav-link text-white">Карточка товара</a></li>
+      <li><a href="category1.html" class="nav-link text-white">Карточки продуктов:</a></li>
+
+      {% for product in products %}
+      <li><a href="{% url 'catalog:product_detail' product.pk %}" class="nav-link text-white">- {{ product.name }}</a></li>
+      {% endfor %}
+
       <li><a href="{% url 'catalog:contacts' %}" class="nav-link text-white">Контакты</a></li>
     </ul>
     <hr>
@@ -21,4 +27,5 @@
         <li><a class="dropdown-item" href="#">Выход</a></li>
       </ul>
     </div>
+
 </div>
