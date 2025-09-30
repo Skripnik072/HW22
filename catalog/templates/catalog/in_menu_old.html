@@ -6,11 +6,16 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"><a href="{% url 'catalog:home' %}" class="nav-link text-white">Главная</a></li>
-      <li><a href="{% url 'catalog:product_list' %}" class="nav-link text-white">Каталог</a></li>
+      <li><a href="{% url 'catalog:products_list' %}" class="nav-link text-white">Каталог</a></li>
       <li><a href="category1.html" class="nav-link text-white">Категории</a></li>
       <li><a href="category1.html" class="nav-link text-white">Карточки продуктов:</a></li>
+      {% if user.is.authenticated %}
+      <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link text-white">Выход</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link text-white">Вход</a></li>
+      {% endif %}
 
-      {% for product in object_list %}
+      {% for product in products %}
       <li><a href="{% url 'catalog:product_detail' product.pk %}" class="nav-link text-white">- {{ product.name }}</a></li>
       {% endfor %}
 
@@ -19,15 +24,12 @@
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+        <img src="https://via.placeholder.com/32" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong>Пользователь</strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-      {% if user.is_authenticated %}
-      <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link text-white">Выход</a></li>
-      {% else %}
-      <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link text-white">Вход</a></li>
-      <li class="nav-item"><a href="{% url 'users:register' %}" class="nav-link text-white">Регистрация</a></li>
-      {% endif %}
+        <li><a class="dropdown-item" href="#">Профиль</a></li>
+        <li><a class="dropdown-item" href="#">Выход</a></li>
       </ul>
     </div>
 
