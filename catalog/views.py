@@ -6,13 +6,19 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from catalog.forms import ProductForm, ProductModeratorForm
 from catalog.models import Product
+from catalog.services import get_products_from_cache
+from config.settings import CACHE_ENABLED
+from catalog.services import ProductsService
 
 
 class ProductListView(ListView):
     model = Product
 
     def get_queryset(self):
-        return Product.objects.filter(views_counter__gt=-1)
+        if CACHE_ENABLED:
+            return get_products_from_cache()
+        else:
+            return Product.objects.filter(views_counter__gt=-1)
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -73,5 +79,24 @@ def home(request):
 
 def contacts(request):
     return render(request, 'contacts.html')
+
+class ProductsCategoryView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = "catalog/products_by_category.html"
+    context_object_name = "prodcat"
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('category_id')
+        return ProductsService.get_products_by_category(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        category_id = self.kwargs.get('category_id')
+
+        context["category_id"] = category_id
+        return context
+
+
 
 
