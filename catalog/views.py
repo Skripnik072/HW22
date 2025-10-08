@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.forms import ProductForm, ProductModeratorForm
-from catalog.models import Product
+from catalog.models import Product, Category
 from catalog.services import get_products_from_cache
 from config.settings import CACHE_ENABLED
 from catalog.services import ProductsService
@@ -91,12 +91,12 @@ class ProductsCategoryView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         category_id = self.kwargs.get('category_id')
-
         context["category_id"] = category_id
         return context
 
-
-
-
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     categories = Product.objects.values_list('categor', flat=True).distinct()
+    #     context['categories'] = categories
+    #     return context
