@@ -1,9 +1,10 @@
 from django.urls import path, include
 from django.views.decorators.cache import cache_page
-from django.views.generic import DetailView
 
 from catalog.apps import CatalogConfig
+
 from . import views
+
 from catalog.views import home, contacts, ProductListView, ProductDetailView, ProductCreateView, ProductUpdateView, \
     ProductDeleteView, ProductsCategoryView
 

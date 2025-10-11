@@ -76,7 +76,6 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 def home(request):
     return render(request, 'home.html')
 
-
 def contacts(request):
     return render(request, 'contacts.html')
 
@@ -86,17 +85,27 @@ class ProductsCategoryView(LoginRequiredMixin, ListView):
     context_object_name = "prodcat"
 
     def get_queryset(self):
-        category_id = self.kwargs.get('category_id')
-        return ProductsService.get_products_by_category(category_id)
+        print("Метод get_queryset вызван")  # Проверка вызова
+        category_id = self.kwargs.get('category_id') # Получение категории из URL параметров
+        print("КАТЕГОРИЯ", category_id )
+        return ProductsService.get_products_by_category(category_id)  # Вызов сервисной функции
 
     def get_context_data(self, **kwargs):
+        # Получаем стандартный контекст данных из родительского класса
         context = super().get_context_data(**kwargs)
+        list_category = Category.objects.all()
+        print("Список категорий", list_category)
+        context['list_category'] = list_category
+        # Получаем ID категории из объекта
         category_id = self.kwargs.get('category_id')
-        context["category_id"] = category_id
+        # Добавляем категорию в контекст
+        context['category_id'] = category_id
         return context
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     categories = Product.objects.values_list('categor', flat=True).distinct()
-    #     context['categories'] = categories
-    #     return context
+    def some_view(request):
+        categories = Category.objects.all()
+        products = Product.objects.all()
+        return render(request, 'catalog/product_list', {
+            'list_category': categories,
+            'object_list': products,
+        })

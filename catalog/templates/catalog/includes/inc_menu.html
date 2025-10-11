@@ -7,14 +7,13 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item"><a href="{% url 'catalog:home' %}" class="nav-link text-white">Главная</a></li>
       <li><a href="{% url 'catalog:product_list' %}" class="nav-link text-white">Каталог</a></li>
-      <li><a href="#" class="nav-link text-white">Категории:</a></li>
 
-  {% for product in prodcat %}
-    <li><a href="{% url 'catalog:products_by_category' category_id=category.id %}" class="nav-link text-white">{{ product.categor }}</a></li>
-  {% endfor %}
+      <li><a href="#" class="nav-link text-white">Категории:</a></li>
+      {% for category in list_category %}
+      <li><a href="{% url 'catalog:products_by_category' category_id=category.id %}" class="nav-link text-white">{{ category.name }}</a></li>
+      {% endfor %}
 
       <li><a href="category1.html" class="nav-link text-white">Карточки продуктов:</a></li>
-
       {% for product in object_list %}
       <li><a href="{% url 'catalog:product_detail' product.pk %}" class="nav-link text-white">- {{ product.name }}</a></li>
       {% endfor %}
