@@ -1,4 +1,4 @@
-{% extends 'base_prod.html' %}
+{% extends 'catalog/base_prod.html' %}
 {% block content %}
 
 <style>
@@ -10,9 +10,11 @@
 
 </style>
    <div class="content-area">
-    <h1 class="text-center" style="padding: 30px">Продукт</h1>
+    <h1 class="text-center" style="padding: 30px">Продукты выбранной категории</h1>
+
     <div class="row">
 
+      {% for product in prodcat %}
         <div class="col-md-4 mb-4">
         <div class="card">
         <div class="card-header" >
@@ -21,16 +23,15 @@
         </div>
         </div>
         <div class="card-body">
-        <p class="card-text" style="text-align: center" > {{ product.name }} (pk = {{ product.pk }})</p>
-        <p class="card-text" style="text-align: center" > {{ product.description|truncatechars:100 }}</p>
+        <p class="card-text" style="text-align: center" > {{ product.name }} </p>
+        <p class="card-text" style="text-align: center" > {{ product.description }}</p>
         <p class="card-text" style="text-align: center" > Цена за 1 кг {{ product.price }} руб.</p>
-        <a href="#" class="btn btn-outline-primary" >View</a>
-        <a href="#" class="btn btn-outline-primary" >Edit</a>
-        <h6 style="text-align: right">9 mins</h6>
+
         </div>
         </div>
       </div>
-
+        {% endfor %}
     </div>
+       <a href="{% url 'catalog:product_list' %}" class="btn btn-primary">Возврат в каталог продуктов</a>
     </div>
         {% endblock %}

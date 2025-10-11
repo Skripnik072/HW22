@@ -1,4 +1,4 @@
-{% extends 'base_prod.html' %}
+{% extends 'catalog/base_prod.html' %}
 {% block content %}
 
 <style>
@@ -21,12 +21,10 @@
         </div>
         </div>
         <div class="card-body">
-        <p class="card-text" style="text-align: center" > {{ product.name }} (pk = {{ product.pk }})</p>
-        <p class="card-text" style="text-align: center" > {{ product.description|truncatechars:100 }}</p>
-        <p class="card-text" style="text-align: center" > Цена за 1 кг {{ product.price }} руб.</p>
-        <a href="#" class="btn btn-outline-primary" >View</a>
-        <a href="#" class="btn btn-outline-primary" >Edit</a>
-        <h6 style="text-align: right">9 mins</h6>
+        <p class="card-text" style="text-align: center" > {{ object.name }} )</p>
+        <p class="card-text" style="text-align: center" > {{ object.description|truncatechars:100 }}</p>
+        <p class="card-text" style="text-align: center" > Цена за 1 кг {{ object.price }} руб.</p>
+
         </div>
         </div>
       </div>

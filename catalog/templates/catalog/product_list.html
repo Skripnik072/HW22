@@ -1,0 +1,48 @@
+{% extends 'catalog/base_prod.html' %}
+{% block content %}
+
+<style>
+        img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            }
+
+</style>
+   <div class="content-area">
+    <h1 class="text-center" style="padding: 30px">Каталог</h1>
+    <div>
+        <p>
+        {% if user.is_authenticated %}
+         <a class="btn btn-outline-primary" href="{% url 'catalog:product_create' %}" role="button">Создать</a>
+        {% endif %}
+        </p>
+
+    </div>
+    <div class="row">
+
+      {% for product in object_list %}
+        <div class="col-md-4 mb-4">
+        <div class="card">
+        <div class="card-header" >
+        <div class="center-items">
+        <img src="/media/{{ product.photo }}">
+        </div>
+        </div>
+        <div class="card-body">
+        <p class="card-text" style="text-align: center" > {{ product.name }} </p>
+        <p class="card-text" style="text-align: center" > {{ product.description }}</p>
+        <p class="card-text" style="text-align: center" > Цена за 1 кг {{ product.price }} руб.</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}" role="button">Просмотр</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}" role="button">Изменить</a>
+        <a class="btn btn-outline-primary" href="{% url 'catalog:product_delete' product.pk %}" role="button">Удалить</a>
+        {% endif %}
+        <h6 style="text-align: right">9 mins</h6>
+        </div>
+        </div>
+      </div>
+        {% endfor %}
+    </div>
+    </div>
+        {% endblock %}

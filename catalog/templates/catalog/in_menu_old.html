@@ -9,6 +9,11 @@
       <li><a href="{% url 'catalog:products_list' %}" class="nav-link text-white">Каталог</a></li>
       <li><a href="category1.html" class="nav-link text-white">Категории</a></li>
       <li><a href="category1.html" class="nav-link text-white">Карточки продуктов:</a></li>
+      {% if user.is.authenticated %}
+      <li class="nav-item"><a href="{% url 'users:logout' %}" class="nav-link text-white">Выход</a></li>
+      {% else %}
+      <li class="nav-item"><a href="{% url 'users:login' %}" class="nav-link text-white">Вход</a></li>
+      {% endif %}
 
       {% for product in products %}
       <li><a href="{% url 'catalog:product_detail' product.pk %}" class="nav-link text-white">- {{ product.name }}</a></li>
